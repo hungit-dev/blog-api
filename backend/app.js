@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const path = require("node:path");
+const passport = require("./passport-config");
 
 const app = express();
 //use router
