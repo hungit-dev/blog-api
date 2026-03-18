@@ -1,12 +1,19 @@
-require("dotenv").config();
+require("dotenv").config({ path: "../.env" });
+require('./passport-auth-config');  //register passport jwt strategy
 const express = require("express");
 const session = require("express-session");
 const path = require("node:path");
-const passport = require("./passport-config");
+const blogApiRouter = require("./routes/blogApiRouter");
+
+const passport = require("./passport-auth-config");
 
 const app = express();
+
+/*read form submissions and use it values*/
+app.use(express.urlencoded({ extended: true }));
+//initialize passport
+app.use(passport.initialize())
 //use router
-const blogApiRouter = require("./routes/blogApiRouter");
 app.use("/", blogApiRouter);
 
 //set the port

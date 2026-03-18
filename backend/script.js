@@ -1,17 +1,6 @@
-import { prisma } from './lib/prisma.js';
-
+const { prisma } = require('./lib/prisma');
 async function main() {
-    const newUser = await prisma.user.create(
-        {
-            data: {
-                email:"test@example.com",
-                username:"testuser",
-                password:"password123",
-                role: "READER"
-            }
-        }
-    )
-    console.log(newUser);
+  
 }
 main()
   .then(async () => {
