@@ -8,7 +8,7 @@ const indexGet=async(req,res)=>{
 }
 
 //User controllers
-const signUpPostMock=async(req,res)=>{
+const signUpPost=async(req,res)=>{
     try{
         const data=req.body
         const isExisting=await prisma.user.findUnique({where:{email:data.email}})
@@ -27,12 +27,7 @@ const signUpPostMock=async(req,res)=>{
 }
 const loginPost=async (req,res)=>{
     try{
-        const mockUser={
-        email:"mock@example.com",
-        username:"mockUser",
-        password:"password123",
-    }
-        const { email, password } = mockUser;
+        const { email, password } = req.body;
         const user = await prisma.user.findUnique({ where: { email } });
         if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
@@ -96,6 +91,7 @@ const postUpdate=async(req,res)=>{
         const userId=req.user.id;
         const postId=Number(req.params.id);
         const postData=await prisma.post.findUnique({where:{id:postId}})
+        if(!postData) return res.status(404).json({error:"Post not found"})
         if (userId != postData.userId) return res.status(403).json({message:"You do not have permission to edit this post"})
         const data={
             title:req.body.title ,
@@ -110,4 +106,54 @@ const postUpdate=async(req,res)=>{
         res.status(500).json({message:"Something went wrong."})
     }
 }
-module.exports={signUpPostMock,loginPost,profileGet,indexGet,postGet,postPost,postDelete,postUpdate}
+
+//Comment controllers
+const commentPost=async(req,res)=>{
+    try {
+        const userId = req.user.id
+        const postId=   Number(req.params.id);
+        const mockComment="This is a mock comment."
+        const commentData= await prisma.comment.create({data:{
+            content:mockComment,
+            userId,
+            postId
+        }})
+        return res.status(201).json(commentData)
+    } catch(e) {
+        res.status(500).json({message:"Something went wrong."})
+    }
+}
+const commentUpdate=async(req,res)=> {
+    try{
+        const userId=req.user.id;
+        const commentId=Number(req.params.id);
+        const commentData=await prisma.comment.findUnique({where:{id:commentId}})
+        if(!commentData) return res.status(404).json({error:"Comment not found"})
+        if (userId != commentData.userId) return res.status(403).json({message:"You do not have permission to edit this comment"})
+        const data={
+            title:req.body.title ,
+            content:req.body.content,
+        }
+        await prisma.comment.update({
+            where: {id:commentId},
+            data
+        })
+        return res.status(200).json({message:"Updated comment successfully"})
+    }catch(e){
+        res.status(500).json({message:"Something went wrong."})
+    }
+}
+const commentDelete=async(req,res)=>{
+    try {
+        const userId=req.user.id;
+        const commentId=Number(req.params.id);
+        const commentData=await prisma.comment.findUnique({where:{id:commentId}})
+        if(!commentData) return res.status(404).json({error:"Comment not found"})
+        if (userId != commentData.userId) return res.status(403).json({message:"You do not have permission to delete this comment"})
+        await prisma.comment.delete({where: {id:commentId}})
+        return res.status(200).json({message:"Deleted comment successfully"})
+    } catch(e) {
+        res.status(500).json({message:"Something went wrong."})
+    }
+}
+module.exports={signUpPost,loginPost,profileGet,indexGet,postGet,postPost,postDelete,postUpdate,commentPost,commentUpdate,commentDelete}
