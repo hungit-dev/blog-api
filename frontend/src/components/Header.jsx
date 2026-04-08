@@ -1,5 +1,7 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 export default function Header() {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
   return (
     <>
       <div className=" bg-base-100 w-full shadow rounded-md">
@@ -112,11 +114,14 @@ export default function Header() {
               </ul>
             </div>
             <div className="navbar-end">
-              <input
-                type="text"
-                placeholder="Search blogs..."
-                className="input input-bordered w-64 lg:w-auto"
-              />
+              {/* show search bar if on home page */}
+              {isHomePage && (
+                <input
+                  type="text"
+                  placeholder="Search blogs..."
+                  className="input input-bordered w-64 lg:w-auto"
+                />
+              )}
             </div>
           </div>
 
