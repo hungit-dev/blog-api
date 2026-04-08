@@ -1,4 +1,4 @@
-import Card from "./sub-components/Card";
+import HomePageCard from "./sub-components/HomePageCard";
 export function HomePage() {
   return (
     <>
@@ -11,8 +11,8 @@ export function HomePage() {
           </p>
         </div>
         <div className="max-lg:collapse bg-base-100 lg:max-w-4xl lg:mx-auto p-5 flex flex-col gap-5">
-          <Card />
-          <Card />
+          <HomePageCard />
+          <HomePageCard />
         </div>
       </div>
     </>

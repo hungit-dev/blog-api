@@ -1,4 +1,4 @@
-export default function Card() {
+export default function HomePageCard() {
   return (
     <>
       <article className="w-full h-[210px] p-3 rounded-md shadow flex flex-col gap-3 cursor-pointer">
