@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 export default function Header() {
   return (
     <>
@@ -29,13 +30,15 @@ export default function Header() {
                   />
                 </svg>
               </label>
-              <button className="btn btn-ghost text-xl font-bold">Blog</button>
+              <Link to="/" className="btn btn-ghost text-xl font-bold">
+                Blog
+              </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
               {/* show these links when user is not logged in */}
               <ul className="menu menu-horizontal px-1 text-base">
                 <li>
-                  <a href="">
+                  <Link to="/write">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -51,19 +54,19 @@ export default function Header() {
                       />
                     </svg>
                     Write
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href=""> Log in</a>
+                  <Link to="/login"> Log in</Link>
                 </li>
                 <li>
-                  <a href="">Sign up</a>
+                  <Link to="/signup">Sign up</Link>
                 </li>
               </ul>
               {/* show these links when user is logged in*/}
               <ul className="menu menu-horizontal px-1 text-base hidden">
                 <li>
-                  <a href="">
+                  <Link to="/write">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -79,13 +82,13 @@ export default function Header() {
                       />
                     </svg>
                     Write
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="">Dashboard</a>
+                  <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
-                  <a href="">
+                  <Link to="/logout">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -104,7 +107,7 @@ export default function Header() {
                       />
                     </svg>
                     Logout
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -121,7 +124,7 @@ export default function Header() {
             {/* show these links when user is not logged in */}
             <ul className="menu text-base">
               <li>
-                <a href="">
+                <Link to="/write">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -137,19 +140,19 @@ export default function Header() {
                     />
                   </svg>
                   Write
-                </a>
+                </Link>
               </li>
               <li>
-                <a href=""> Log in</a>
+                <Link to="/login"> Log in</Link>
               </li>
               <li>
-                <a href="">Sign up</a>
+                <Link to="/signup">Sign up</Link>
               </li>
             </ul>
             {/* show these links when user is logged in*/}
             <ul className="menu hidden text-base">
               <li>
-                <a href="">
+                <Link to="/write">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -165,13 +168,13 @@ export default function Header() {
                     />
                   </svg>
                   Write{" "}
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="">Dashboard</a>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
               <li>
-                <a href="">
+                <Link to="/logout">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -190,7 +193,7 @@ export default function Header() {
                     />
                   </svg>
                   Logout
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
