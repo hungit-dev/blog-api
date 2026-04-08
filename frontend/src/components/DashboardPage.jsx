@@ -4,9 +4,9 @@ export default function DashboardPage() {
     <>
       <div className=" bg-base-100 w-full shadow-sm rounded-md min-h-[90vh] mt-3">
         <div className="max-lg:collapse bg-base-100 lg:max-w-6xl lg:mx-auto p-5">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between md:items-center gap-3">
             <div className="dropdown dropdown-start">
-              <div tabIndex={0} role="button" className="btn m-1">
+              <div tabIndex={0} role="button" className="btn">
                 Sort By{" "}
                 <svg
                   stroke="currentColor"
