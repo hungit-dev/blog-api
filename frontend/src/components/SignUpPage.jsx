@@ -79,6 +79,11 @@ export default function SignUpPage() {
               At least one uppercase letter
             </p>
           </fieldset>
+          {/* Become an author checkbox */}
+          <label className="label pt-4 pb-2 text-sm">
+            <input type="checkbox" className="checkbox" />
+            Become an author
+          </label>
           <button className="btn bg-black text-white border-black mt-3 w-full hover:bg-[#333333]">
             Sign Up
           </button>
