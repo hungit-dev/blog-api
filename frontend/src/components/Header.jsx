@@ -33,7 +33,7 @@ export default function Header() {
                 </svg>
               </label>
               <Link to="/" className="btn btn-ghost text-xl font-bold">
-                Blog
+                The Journal
               </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
