@@ -19,7 +19,7 @@ export default function HomePageCard() {
           ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
         <div className="flex gap-2 text-[15px] text-gray-600 items-center">
-          <time>Mar 30,2026</time>
+          <time>Mar 30, 2026</time>
           <span>·</span>
           <span>1 min read </span>
           <span>·</span>

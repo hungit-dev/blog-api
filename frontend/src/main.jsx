@@ -7,6 +7,7 @@ import SignUpPage from "./components/SignUpPage.jsx";
 import LogInPage from "./components/LogInPage.jsx";
 import DashboardPage from "./components/DashboardPage.jsx";
 import CreatePostPage from "./components/CreatePostPage.jsx";
+import HomePostViewPage from "./components/HomePostViewPage.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "/posts",
+        element: <HomePostViewPage />,
       },
       {
         path: "/signup",
