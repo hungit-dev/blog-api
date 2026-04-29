@@ -8,6 +8,7 @@ import LogInPage from "./components/LogInPage.jsx";
 import DashboardPage from "./components/DashboardPage.jsx";
 import CreatePostPage from "./components/CreatePostPage.jsx";
 import HomePostViewPage from "./components/HomePostViewPage.jsx";
+import DashboardPostViewPage from "./components/DashboardPostViewPage.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashboardPage />,
+      },
+      {
+        path: "/dashboard/posts",
+        element: <DashboardPostViewPage />,
       },
       {
         path: "/write",
