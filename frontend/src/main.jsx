@@ -9,6 +9,7 @@ import DashboardPage from "./components/DashboardPage.jsx";
 import CreatePostPage from "./components/CreatePostPage.jsx";
 import HomePostViewPage from "./components/HomePostViewPage.jsx";
 import DashboardPostViewPage from "./components/DashboardPostViewPage.jsx";
+import EditPostPage from "./components/EditPostPage.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/write",
         element: <CreatePostPage />,
+      },
+      {
+        path: "/dashboard/posts/edit",
+        element: <EditPostPage />,
       },
     ],
   },
