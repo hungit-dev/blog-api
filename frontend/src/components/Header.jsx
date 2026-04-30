@@ -32,7 +32,7 @@ export default function Header() {
                   />
                 </svg>
               </label>
-              <Link to="/" className="btn btn-ghost text-xl font-bold">
+              <Link to="/" className="btn btn-ghost text-xl font-bold p-0">
                 The Journal
               </Link>
             </div>
@@ -40,7 +40,7 @@ export default function Header() {
               {/* show these links when user is not logged in */}
               <ul className="menu menu-horizontal px-1 text-base">
                 <li>
-                  <Link to="/write">
+                  <Link to="/dashboard/write">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -68,7 +68,7 @@ export default function Header() {
               {/* show these links when user is logged in*/}
               <ul className="menu menu-horizontal px-1 text-base hidden">
                 <li>
-                  <Link to="/write">
+                  <Link to="/dashboard/write">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -129,7 +129,7 @@ export default function Header() {
             {/* show these links when user is not logged in */}
             <ul className="menu text-base">
               <li>
-                <Link to="/write">
+                <Link to="/dashboard/write">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -157,7 +157,7 @@ export default function Header() {
             {/* show these links when user is logged in*/}
             <ul className="menu hidden text-base">
               <li>
-                <Link to="/write">
+                <Link to="/dashboard/write">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"

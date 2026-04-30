@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         element: <DashboardPostViewPage />,
       },
       {
-        path: "/write",
+        path: "/dashboard/write",
         element: <CreatePostPage />,
       },
     ],
