@@ -38,7 +38,7 @@ export default function HomePostViewPage() {
                 ></textarea>
                 <button
                   type="submit"
-                  className="absolute bottom-3 right-3 flex items-center justify-center"
+                  className="absolute bottom-9 right-3 flex items-center justify-center"
                 >
                   <svg
                     stroke="currentColor"
@@ -53,10 +53,8 @@ export default function HomePostViewPage() {
                     <path d="m16 464 480-208L16 48v160l320 48-320 48z"></path>
                   </svg>
                 </button>
+                <p className="validator-hint">Comment must not be empty</p>
               </div>
-              <p className="validator-hint hidden peer-invalid:block">
-                Comment must not be empty
-              </p>
             </form>
             <div>
               <CommentCard />
