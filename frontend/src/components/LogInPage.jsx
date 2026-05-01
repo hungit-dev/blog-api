@@ -1,11 +1,10 @@
 import API_URL from "../lib/api";
-import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 
 export default function LogInPage() {
   const { loginMutation } = useAuth();
 
-  //Get states for login mutation
+  // Get states for login mutation
   const { mutate: login, isPending: isLogging, isError, error } = loginMutation;
 
   // handlers
@@ -96,7 +95,10 @@ export default function LogInPage() {
               At least one uppercase letter
             </p>
           </fieldset>
-          <button className="btn bg-black text-white border-black mt-3 w-full hover:bg-[#333333]">
+          <button
+            className="btn bg-black text-white border-black mt-3 w-full hover:bg-[#333333] disabled:opacity-70"
+            disabled={isLogging}
+          >
             {isLogging ? (
               <span className="loading loading-dots loading-lg"></span>
             ) : (
