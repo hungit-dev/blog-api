@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config();
 require("./passport-auth-config"); //register passport jwt strategy
 const express = require("express");
 const session = require("express-session");
