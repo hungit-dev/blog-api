@@ -4,6 +4,26 @@ export default function SignUpPage() {
       <div className=" bg-base-100 w-full shadow-sm rounded-md min-h-[90vh] mt-3">
         <form className="max-lg:collapse bg-base-100 md:max-w-md md:mx-auto lg:max-w-sm p-5">
           <h1 className=" font-semibold text-center text-2xl mb-2">Sign Up</h1>
+          {/* email */}
+          <fieldset className="fieldset w-full">
+            <label
+              htmlFor="email"
+              className="fieldset-legend text-base text-dark-600"
+            >
+              Email
+            </label>
+            <input
+              id="email"
+              className="input validator w-full"
+              type="email"
+              required
+              placeholder="mail@site.com"
+              autoComplete="email"
+            />
+            <div className="validator-hint hidden peer-invalid:block">
+              Enter valid email address
+            </div>
+          </fieldset>
           {/* username */}
           <fieldset className="fieldset w-full">
             <label
@@ -29,26 +49,6 @@ export default function SignUpPage() {
               <br />
               containing only letters, numbers or dash
             </p>
-          </fieldset>
-          {/* email */}
-          <fieldset className="fieldset w-full">
-            <label
-              htmlFor="email"
-              className="fieldset-legend text-base text-dark-600"
-            >
-              Email
-            </label>
-            <input
-              id="email"
-              className="input validator w-full"
-              type="email"
-              required
-              placeholder="mail@site.com"
-              autoComplete="email"
-            />
-            <div className="validator-hint hidden peer-invalid:block">
-              Enter valid email address
-            </div>
           </fieldset>
           {/* password */}
           <fieldset className="fieldset w-full">
