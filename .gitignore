@@ -1,3 +1,4 @@
 backend/node_modules
 backend/generated/prisma
 .env
+script.js

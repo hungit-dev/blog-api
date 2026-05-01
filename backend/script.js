@@ -1,15 +1,17 @@
-require("dotenv").config({ path: "../.env" });
-const { prisma } = require('./lib/prisma');
-async function main() {
+require("dotenv").config();
+const { prisma } = require("./lib/prisma");
+const bcrypt = require("bcryptjs");
 
-  const post = await prisma.post.create({
-    data:{
-      title: "My First Post",
-      content: "This is the content of my first post.",
-      published: true,
-      userId: 1,
-    }
-  })
+async function main() {
+  const newPassword = "NewPassword123";
+  const hashed = await bcrypt.hash(newPassword, 10);
+
+  await prisma.user.update({
+    where: { email: "mock@example.com" },
+    data: { password: hashed },
+  });
+
+  console.log("Password updated.");
 }
 main()
   .then(async () => {
