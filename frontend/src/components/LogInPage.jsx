@@ -7,27 +7,23 @@ export default function LogInPage() {
           {/* username */}
           <fieldset className="fieldset w-full">
             <label
-              htmlFor="username"
+              htmlFor="email"
               className="fieldset-legend text-base text-dark-600"
             >
-              Username
+              Email
             </label>
             <input
-              id="username"
-              type="text"
+              id="email"
+              type="email"
               className="input validator w-full"
               required
-              placeholder="Username"
-              pattern="[A-Za-z][A-Za-z0-9\-]*"
-              minLength="3"
-              maxLength="30"
-              title="Only letters, numbers or dash"
-              autoComplete="username"
+              placeholder="Email"
+              pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+              title="Enter a valid email address"
+              autoComplete="email"
             />
             <p className="validator-hint hidden peer-invalid:block">
-              Must be 3 to 30 characters
-              <br />
-              containing only letters, numbers or dash
+              Enter a valid email address
             </p>
           </fieldset>
           {/* password */}
