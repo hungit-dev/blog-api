@@ -1,10 +1,50 @@
+import API_URL from "../lib/api";
+import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+
 export default function LogInPage() {
+  const { loginMutation } = useAuth();
+
+  //Get states for login mutation
+  const { mutate: login, isPending: isLogging, isError, error } = loginMutation;
+
+  // handlers
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    login({ email: form.email.value, password: form.password.value });
+  }
+
   return (
     <>
       <div className=" bg-base-100 w-full shadow-sm rounded-md min-h-[90vh] mt-3">
-        <form className="max-lg:collapse bg-base-100 md:max-w-md md:mx-auto lg:max-w-sm p-5">
+        <form
+          className="max-lg:collapse bg-base-100 md:max-w-md md:mx-auto lg:max-w-sm p-5"
+          onSubmit={handleSubmit}
+        >
           <h1 className=" font-semibold text-center text-2xl mb-2">Log In</h1>
-          {/* username */}
+
+          {/* error alert */}
+          {isError && (
+            <div role="alert" className="alert alert-error">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 shrink-0 stroke-current"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>{error.message}</span>
+            </div>
+          )}
+
+          {/* email */}
           <fieldset className="fieldset w-full">
             <label
               htmlFor="email"
@@ -26,6 +66,7 @@ export default function LogInPage() {
               Enter a valid email address
             </p>
           </fieldset>
+
           {/* password */}
           <fieldset className="fieldset w-full">
             <label
@@ -56,7 +97,11 @@ export default function LogInPage() {
             </p>
           </fieldset>
           <button className="btn bg-black text-white border-black mt-3 w-full hover:bg-[#333333]">
-            Log In
+            {isLogging ? (
+              <span className="loading loading-dots loading-lg"></span>
+            ) : (
+              "Log In"
+            )}
           </button>
         </form>
       </div>
