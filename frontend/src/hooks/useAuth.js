@@ -1,13 +1,27 @@
 import API_URL from "../lib/api";
+import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 const useAuth = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient(); //get access to the cache data
+  const queryClient = useQueryClient();
+  const { isLoggedIn, setIsLoggedIn, isAuthor, setIsAuthor } =
+    useContext(AuthContext);
 
   // Functions
+  const getProfileFn = async () => {
+    const token = localStorage.getItem("token");
+    const res = await fetch(`${API_URL}/profile`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    setIsAuthor(data.user?.role === "AUTHOR");
+    return data;
+  };
+
   const loginFn = async ({ email, password }) => {
     const res = await fetch(`${API_URL}/login`, {
       method: "POST",
@@ -21,6 +35,9 @@ const useAuth = () => {
     console.log(data);
     if (res.ok) {
       localStorage.setItem("token", data.token);
+      setIsLoggedIn(true);
+      // get new profile data after every login
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
     } else {
       throw new Error(data.message || "Login failed");
     }
@@ -28,6 +45,9 @@ const useAuth = () => {
 
   const logOut = () => {
     localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setIsAuthor(false);
+    navigate("/");
   };
 
   const signUpFn = async ({ email, username, password, role }) => {
@@ -47,6 +67,13 @@ const useAuth = () => {
     }
   };
 
+  // Queries
+  const profile = useQuery({
+    queryKey: ["profile"],
+    queryFn: getProfileFn,
+    enabled: isLoggedIn,
+  });
+
   // Mutations
   const loginMutation = useMutation({
     mutationFn: loginFn,
@@ -61,6 +88,8 @@ const useAuth = () => {
   return {
     loginMutation,
     logOut,
+    isLoggedIn,
+    isAuthor,
     signUpMutation,
   };
 };

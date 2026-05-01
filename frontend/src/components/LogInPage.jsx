@@ -1,8 +1,11 @@
 import API_URL from "../lib/api";
+import { Navigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 
 export default function LogInPage() {
-  const { loginMutation } = useAuth();
+  const { loginMutation, isLoggedIn } = useAuth();
+
+  if (isLoggedIn) return <Navigate to="/" replace />;
 
   // Get states for login mutation
   const { mutate: login, isPending: isLogging, isError, error } = loginMutation;

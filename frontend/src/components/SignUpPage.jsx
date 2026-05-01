@@ -1,8 +1,11 @@
 import API_URL from "../lib/api";
+import { Navigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 
 export default function SignUpPage() {
-  const { signUpMutation } = useAuth();
+  const { signUpMutation, isLoggedIn } = useAuth();
+
+  if (isLoggedIn) return <Navigate to="/" replace />;
 
   // Get states for sign up mutation
   const {
