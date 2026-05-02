@@ -52,17 +52,53 @@ const profileGet = async (req, res) => {
 };
 
 //Post controllers
-const postGet = async (req, res) => {
+
+// show all published posts
+const postsGet = async (req, res) => {
   try {
+    const postsData = await prisma.post.findMany({
+      where: {
+        published: true,
+      },
+    });
+    return res.status(200).json(postsData);
+  } catch (e) {
+    res.status(500).json({ message: "Something went wrong." });
+  }
+};
+const userPostsGet = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const postsData = await prisma.post.findMany({ where: { userId } });
+    return res.status(200).json(postsData);
+  } catch (e) {
+    res.status(500).json({ message: "Something went wrong." });
+  }
+};
+const userPostGet = async (req, res) => {
+  try {
+    const userId = req.user.id;
     const id = Number(req.params.id);
-    const postData = await prisma.post.findUnique({ where: { id } });
+    const postData = await prisma.post.findFirst({ where: { id, userId } });
     if (!postData) return res.status(404).json({ error: "Post not found" });
     return res.status(200).json(postData);
   } catch (e) {
     res.status(500).json({ message: "Something went wrong." });
   }
 };
-const postPost = async (req, res) => {
+// show a published post by id
+const postGet = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const postData = await prisma.post.findUnique({ where: { id } });
+    if (!postData || !postData.published)
+      return res.status(404).json({ error: "Post not found" });
+    return res.status(200).json(postData);
+  } catch (e) {
+    res.status(500).json({ message: "Something went wrong." });
+  }
+};
+const userPostPost = async (req, res) => {
   try {
     const userId = req.user.id;
     const { title, content } = req.body;
@@ -77,7 +113,7 @@ const postPost = async (req, res) => {
     res.status(500).json({ message: "Something went wrong." });
   }
 };
-const postDelete = async (req, res) => {
+const userPostDelete = async (req, res) => {
   try {
     const userId = req.user.id;
     const postId = Number(req.params.id);
@@ -93,7 +129,7 @@ const postDelete = async (req, res) => {
     res.status(500).json({ message: "Something went wrong." });
   }
 };
-const postUpdate = async (req, res) => {
+const userPostUpdate = async (req, res) => {
   try {
     const userId = req.user.id;
     const postId = Number(req.params.id);
@@ -118,7 +154,7 @@ const postUpdate = async (req, res) => {
 };
 
 //Comment controllers
-const commentPost = async (req, res) => {
+const userCommentPost = async (req, res) => {
   try {
     const userId = req.user.id;
     const postId = Number(req.params.id);
@@ -135,7 +171,7 @@ const commentPost = async (req, res) => {
     res.status(500).json({ message: "Something went wrong." });
   }
 };
-const commentUpdate = async (req, res) => {
+const userCommentUpdate = async (req, res) => {
   try {
     const userId = req.user.id;
     const commentId = Number(req.params.id);
@@ -161,7 +197,7 @@ const commentUpdate = async (req, res) => {
     res.status(500).json({ message: "Something went wrong." });
   }
 };
-const commentDelete = async (req, res) => {
+const userCommentDelete = async (req, res) => {
   try {
     const userId = req.user.id;
     const commentId = Number(req.params.id);
@@ -185,11 +221,14 @@ module.exports = {
   loginPost,
   profileGet,
   indexGet,
+  postsGet,
+  userPostsGet,
+  userPostGet,
   postGet,
-  postPost,
-  postDelete,
-  postUpdate,
-  commentPost,
-  commentUpdate,
-  commentDelete,
+  userPostPost,
+  userPostDelete,
+  userPostUpdate,
+  userCommentPost,
+  userCommentUpdate,
+  userCommentDelete,
 };
