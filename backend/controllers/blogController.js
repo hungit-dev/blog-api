@@ -52,13 +52,15 @@ const profileGet = async (req, res) => {
 };
 
 //Post controllers
-
 // show all published posts
 const postsGet = async (req, res) => {
   try {
     const postsData = await prisma.post.findMany({
       where: {
         published: true,
+      },
+      include: {
+        user: { select: { username: true } },
       },
     });
     return res.status(200).json(postsData);
