@@ -1,4 +1,11 @@
+import { useAuth } from "../hooks/useAuth";
+import { Navigate } from "react-router";
 export default function CreatePostPage() {
+  const { loginMutation, isLoggedIn, isAuthor } = useAuth();
+
+  if (!isLoggedIn) return <Navigate to="/login" replace />;
+  if (!isAuthor) return <Navigate to="/" replace />;
+
   return (
     <>
       <div className=" bg-base-100 w-full shadow-sm rounded-md min-h-[90vh] mt-3">
